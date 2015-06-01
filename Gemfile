@@ -47,7 +47,9 @@ group :deployment do
   gem 'capistrano', '~> 3.4.0'
   gem 'capistrano-unicorn-nginx', '~> 3.2.0'
   gem 'capistrano-rails'
-  gem 'rvm1-capistrano3', require: false
+  gem 'capistrano-rbenv'
+  gem 'unicorn'
+  # gem 'rvm1-capistrano3', require: false
   gem 'capistrano-bundler'
   # gem 'capistrano3-unicorn' # unicornを使っている場合のみ
 end
