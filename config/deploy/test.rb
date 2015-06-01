@@ -7,9 +7,9 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
-server 'localhost', user: 'vagrant', roles: %w{web app db}, port: 2222
-set :deploy_to, '/home/vagrant/webapps/capi'
+puts shared_path
+puts fetch(:unicorn_pid)
+puts fetch(:deploy_to)
 
-set :nginx_server_name, 'localhost'
-set :branch, :exam2
-set :unicorn_pid, "#{fetch(:deploy_to)}/shared/tmp/pids/unicorn.pid"
+server 'localhost', user: 'vagrant', roles: %w{web app db}, port: 2222
+# set :unicorn_config, shared_path.join("config/unicorn.rb")
