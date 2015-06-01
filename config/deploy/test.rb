@@ -11,3 +11,4 @@ server 'localhost', user: 'vagrant', roles: %w{web app db}, port: 2222
 
 set :nginx_server_name, 'localhost'
 set :branch, :exam2
+# set :unicorn_pid, "#{fetch(:deploy_to)}/shared/tmp/pids/unicorn.pid"
