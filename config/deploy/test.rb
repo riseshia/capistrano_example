@@ -3,4 +3,4 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server 'localhost', user: 'vagrant', roles: %w{app db web}, port: 2222
+server 'localhost', user: 'vagrant', roles: %w{web}, port: 2222
