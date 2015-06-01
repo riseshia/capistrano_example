@@ -40,6 +40,6 @@ task :deploy => :clone do
       info "No previous release directory exists"
     end
 
-    execute "cd #{release_path}; ( ( nohup RACK_ENV=production ruby server.rb &>/dev/null ) & echo $! > RUNNING_PID)"
+    execute "cd #{release_path}; ( ( nohup ./run.sh &>/dev/null ) & echo $! > RUNNING_PID)"
   end
 end
