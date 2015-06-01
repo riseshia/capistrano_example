@@ -17,13 +17,3 @@ set :branch, :exam2
 set :unicorn_pid, -> { "#{fetch(:deploy_to)}/shared/tmp/pids/unicorn.pid" }
 
 # set :linked_dirs, %w{bin log tmp/backup tmp/pids tmp/cache tmp/sockets vendor/bundle}
-# set :unicorn_pid, shared_path.join("tmp/pids/unicorn.pid")
-
-# # set :bundle_jobs, 4
-
-# after 'deploy:publishing', 'deploy:restart'
-# namespace :deploy do
-#   task :restart do
-#     invoke 'unicorn:restart'
-#   end
-# end
