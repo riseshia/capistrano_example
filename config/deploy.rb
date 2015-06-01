@@ -3,8 +3,6 @@ lock '3.4.0'
 
 set :application, 'capi'
 set :repo_url, 'https://github.com/riseshia/capistrano_example.git'
-set :deploy_to, '/home/vagrant/webapps/capi'
-
 
 set :rbenv_type, :user # :system or :user
 set :rbenv_ruby, '2.2.2'
