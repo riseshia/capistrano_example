@@ -14,6 +14,3 @@ set :deploy_to, '/home/vagrant/webapps/capi'
 
 set :nginx_server_name, 'localhost'
 set :branch, :exam2
-set :unicorn_pid, -> { "#{fetch(:deploy_to)}/shared/tmp/pids/unicorn.pid" }
-
-# set :linked_dirs, %w{bin log tmp/backup tmp/pids tmp/cache tmp/sockets vendor/bundle}
