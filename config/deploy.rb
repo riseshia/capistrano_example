@@ -1,45 +1,51 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.5.0'
 
-set :application, 'capi'
-set :repo_url, 'https://github.com/riseshia/capistrano_example.git'
-set :release_path, '/home/vagrant/www'
+set :application, 'my_app_name'
+# set :repo_url, 'git@example.com:me/my_repo.git'
+set :repo_url, '/Users/Shia/Develop/capi.git'
+set :deploy_via, :copy
 
-framework_tasks = [:starting, :started, :updating, :updated, :publishing, :published, :finishing, :finished]
- 
-framework_tasks.each do |t|
-  Rake::Task["deploy:#{t}"].clear
-end
- 
-Rake::Task[:deploy].clear
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-task :clone do
-  release_path = fetch(:release_path)
-  repo_url = fetch(:repo_url)
+# Default deploy_to directory is /var/www/my_app_name
+# set :deploy_to, '/var/www/my_app_name'
 
-  on roles(:web) do
-    info "clone repository from github"
-    unless test "[ -d #{release_path} ]"
-      execute "mkdir -p #{release_path}"
+# Default value for :scm is :git
+# set :scm, :git
+
+# Default value for :format is :airbrussh.
+# set :format, :airbrussh
+
+# You can configure the Airbrussh format using :format_options.
+# These are the defaults.
+# set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: :auto
+
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+# set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+
+# Default value for linked_dirs is []
+# set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+namespace :deploy do
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
     end
-
-    execute "git clone #{repo_url} #{release_path}"
   end
-end
 
-task :deploy => :clone do
-  release_path = fetch(:release_path)
-
-  on roles(:web) do
-    begin
-      if test "[ -d #{release_path} ]"
-        running_pid = capture("cd #{release_path}; cat RUNNING_PID")
-        execute "kill #{running_pid}"
-      end
-    rescue => e
-      info "No previous release directory exists"
-    end
-
-    execute "cd #{release_path}; ( ( nohup ./run.sh &>/dev/null ) & echo $! > RUNNING_PID)"
-  end
 end
